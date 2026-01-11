@@ -37,20 +37,20 @@ def main():
     test_dataloader = torch.utils.data.DataLoader(test_dataset, batch_size = BATCH_SIZE, shuffle = False)
 
     model=NeuralNetwork().to(device)
-    model.load_state_dict(torch.load("model.pth", weights_only=True))
+    model.load_state_dict(torch.load("mnist/model.pth", weights_only=True))
     loss_fn = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
     inspect_model(model)
 
-    num_epochs=9
+    num_epochs=0
     for epoch in range(num_epochs):
         print(f"Epoch {epoch+1}/{num_epochs}\n-------------------------------")
         train(train_dataloader, model, loss_fn, optimizer)
         test(test_dataloader, model, loss_fn)
 
-    torch.save(model.state_dict(), "model.pth")
-    print("Saved PyTorch Model State to model.pth")
+    torch.save(model.state_dict(), "mnist/model.pth")
+    print("saved model")
 
 def inspect_model(model):
     trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)

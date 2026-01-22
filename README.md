@@ -1,0 +1,1 @@
+This repo hosts some of my rudimentary attempts at machine learning.
